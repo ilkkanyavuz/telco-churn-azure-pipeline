@@ -1,0 +1,22 @@
+{
+  "api": {
+    "base_url": "https://api.example.com/telco-churn",
+    "timeout_seconds": 30
+  },
+  "paths": {
+    "local_raw_dir": "data/raw",
+    "local_processed_dir": "data/processed",
+    "log_file": "logs/telco_churn_ingestion.log"
+  },
+  "azure_blob": {
+    "connection_string": "<YOUR_AZURE_BLOB_CONNECTION_STRING>",
+    "container_name": "telco-churn",
+    "raw_folder": "raw",
+    "processed_folder": "processed"
+  },
+  "ingestion": {
+    "file_prefix": "telcochurn",
+    "date_format": "%Y-%m-%d"
+  }
+}
+
