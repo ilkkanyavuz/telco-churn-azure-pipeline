@@ -1,6 +1,9 @@
-Power BI report for the Telco Customer Churn project.
+# Power BI reports
 
-Pages include:
-- Executive overview
-- Segment analysis
-- Risk & Retention (High/Medium/Low risk segments with drill-through customer details)
+This folder contains the Power BI report for the Telco Customer Churn project.
+
+- `churnbi.pbix` – Full report with:
+  - Executive overview
+  - Segment analysis
+  - Risk & Retention page (High/Medium/Low risk segments, lost revenue, churn rate)
+  - Customer detail drill-through page
