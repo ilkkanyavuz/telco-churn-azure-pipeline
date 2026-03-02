@@ -85,7 +85,3 @@ This project is designed as a portfolio piece to demonstrate end-to-end data ski
    - Commit message: `Add project README`  
    - “Commit directly to the main branch” seçili kalsın.  
    - **Commit changes** butonuna tıkla.
-
-Bunu bitirdiğinde README sayfan yenilenecek.
-
-Sonra istersen bir sonraki adımda SQL scriptlerinin içine gerçekten kullandığımız `TelcoCustomers` tablo create, risk view ve stored procedure kodlarını doldurmaya başlayabiliriz. İlk olarak hangisini eklemek istersin: tablo create scripti mi, yoksa risk segment view + stored procedure mü?
