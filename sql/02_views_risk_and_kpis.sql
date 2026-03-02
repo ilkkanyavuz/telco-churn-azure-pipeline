@@ -51,4 +51,33 @@ FROM dbo.TelcoCustomers;
 
 ------------------------------------------------------------
 -- 2) Overall churn KPIs
---------------------------------------------
+------------------------------------------------------------
+CREATE OR ALTER VIEW dbo.vwOverallChurn AS
+SELECT
+    COUNT(*) AS TotalCustomers,
+    SUM(CASE WHEN Churn = 'Yes' THEN 1 ELSE 0 END) AS ChurnedCustomers,
+    CAST(
+        100.0 * SUM(CASE WHEN Churn = 'Yes' THEN 1 ELSE 0 END) / COUNT(*)
+        AS DECIMAL(5,2)
+    ) AS ChurnRatePct,
+    SUM(MonthlyCharges) AS TotalMonthlyRevenue,
+    SUM(CASE WHEN Churn = 'Yes' THEN MonthlyCharges ELSE 0 END) AS ChurnedMonthlyRevenue
+FROM dbo.TelcoCustomers;
+
+
+------------------------------------------------------------
+-- 3) Churn by contract type
+------------------------------------------------------------
+CREATE OR ALTER VIEW dbo.vwChurnByContract AS
+SELECT
+    Contract,
+    COUNT(*) AS TotalCustomers,
+    SUM(CASE WHEN Churn = 'Yes' THEN 1 ELSE 0 END) AS ChurnedCustomers,
+    CAST(
+        100.0 * SUM(CASE WHEN Churn = 'Yes' THEN 1 ELSE 0 END) / COUNT(*)
+        AS DECIMAL(5,2)
+    ) AS ChurnRatePct,
+    SUM(MonthlyCharges) AS TotalMonthlyRevenue,
+    SUM(CASE WHEN Churn = 'Yes' THEN MonthlyCharges ELSE 0 END) AS ChurnedMonthlyRevenue
+FROM dbo.TelcoCustomers
+GROUP BY Contract;
