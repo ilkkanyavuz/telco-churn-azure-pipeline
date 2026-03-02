@@ -78,10 +78,3 @@ Deploy the SQL scripts in the sql/ folder to your Azure SQL Database.
 Point your Power BI report to the Azure SQL views used in this project.
 
 This project is designed as a portfolio piece to demonstrate end-to-end data skills across Python, Azure, SQL and Power BI for churn analysis.
-
-
-
-3. Sayfanın en altına in, “Commit changes” bölümünde:
-   - Commit message: `Add project README`  
-   - “Commit directly to the main branch” seçili kalsın.  
-   - **Commit changes** butonuna tıkla.
