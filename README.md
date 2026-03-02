@@ -30,3 +30,62 @@ sql/                  # Table, view and stored procedure scripts
 azure/                # Documentation and screenshots for Blob & ADF
 powerbi/              # Power BI report files (pbix) and notes
 docs/                 # Data dictionary and high-level project documentation
+
+4. Pipeline flow
+The Python script loads the Telco Customer Churn dataset, saves a raw copy, applies cleaning (type fixes, tenure segments, SeniorCitizen mapping) and writes a processed CSV.
+
+Raw and processed files are uploaded to Azure Blob Storage under raw/ and processed/ folders.
+
+An Azure Data Factory pipeline (pl_blob_to_sql_telco) truncates the TelcoCustomers table and copies the latest processed file from Blob into Azure SQL.
+
+SQL views calculate churn rate, churned monthly revenue, tenure buckets and a rule-based risk segment (High / Medium / Low).
+
+Power BI connects to the SQL views and exposes churn KPIs through several report pages, including a Risk & Retention page focused on high-risk customers.
+
+A daily ADF trigger (tr_daily_telco_refresh) keeps the SQL layer and Power BI reports up to date.
+
+5. Key features
+Production-style Python ingestion with JSON configuration, structured logging and separate raw/processed layers.
+
+API-ready design for the ingestion script using a requests-style pattern.
+
+Rule-based High / Medium / Low risk segment using contract type, tenure, internet service and payment method.
+
+Parameterised SQL stored procedures for churn KPIs by contract and by risk segment.
+
+Azure Data Factory copy pipeline with daily schedule and truncate-before-load strategy.
+
+Power BI Risk & Retention page showing churn rate and lost monthly revenue by risk segment, plus drill-through customer details.
+
+6. How to run locally (simplified)
+Clone this repository.
+
+Download the Telco Customer Churn dataset from Kaggle and place the CSV in python_pipeline/data_source/.
+
+Copy python_pipeline/config.template.json to config.json and fill in your own Azure Blob connection string and container names.
+
+
+Install Python dependencies:
+
+
+pip install -r python_pipeline/requirements.txt
+Run the ingestion script:
+
+
+python python_pipeline/main.py
+Deploy the SQL scripts in the sql/ folder to your Azure SQL Database.
+
+Point your Power BI report to the Azure SQL views used in this project.
+
+This project is designed as a portfolio piece to demonstrate end-to-end data skills across Python, Azure, SQL and Power BI for churn analysis.
+
+
+
+3. Sayfanın en altına in, “Commit changes” bölümünde:
+   - Commit message: `Add project README`  
+   - “Commit directly to the main branch” seçili kalsın.  
+   - **Commit changes** butonuna tıkla.
+
+Bunu bitirdiğinde README sayfan yenilenecek.
+
+Sonra istersen bir sonraki adımda SQL scriptlerinin içine gerçekten kullandığımız `TelcoCustomers` tablo create, risk view ve stored procedure kodlarını doldurmaya başlayabiliriz. İlk olarak hangisini eklemek istersin: tablo create scripti mi, yoksa risk segment view + stored procedure mü?
